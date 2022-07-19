@@ -2,7 +2,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import mapboxLogo from '../mapbox-logo.base64?raw';
 
-const map = L.map('map', {
+export const map = L.map('map', {
 	center: [48.20884, 16.3712904],
 	zoom: 13,
 	zoomDelta: 0.5,
