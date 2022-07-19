@@ -4,7 +4,7 @@ import mapboxLogo from '../mapbox-logo.base64?raw';
 
 export const map = L.map('map', {
 	center: [48.20884, 16.3712904],
-	zoom: 13,
+	zoom: 12.5,
 	zoomDelta: 0.5,
 	zoomSnap: 0.5,
 	maxBounds: [
@@ -26,7 +26,7 @@ L.tileLayer(tileURL + tileURLParams.toString(), {
 	zoomOffset: -1,
 	tileSize: 512,
 	minZoom: 12,
-	maxZoom: 16,
+	maxZoom: 17,
 }).addTo(map);
 
 const credits1 = L.control.attribution().addTo(map);
