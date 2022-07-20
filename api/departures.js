@@ -2,4 +2,4 @@ export const config = {
 	runtime: 'experimental-edge',
 };
 
-export default (req) => new Response(req.query);
+export default (req) => new Response('Hello');
