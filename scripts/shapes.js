@@ -5,7 +5,11 @@ import linesGeoJson from '../gtfs/filtered/linesGeo.json';
 import stopsCsv from '../gtfs/filtered/stops.csv?url';
 
 L.svg({ clickable: true }).addTo(map);
-const svg = d3.select(map.getPanes().overlayPane).select('svg').attr('pointer-events', 'auto');
+
+export const svg = d3
+	.select(map.getPanes().overlayPane)
+	.select('svg')
+	.attr('pointer-events', 'auto');
 const g = svg.append('g');
 
 const projection = d3.geoTransform({
@@ -23,28 +27,16 @@ const lines = g
 	.join('path')
 	.attr('fill', 'none')
 	.attr('stroke', (d) => d.properties.color)
-	.attr('stroke-width', 5);
+	.attr('stroke-width', 4);
 
 const stopsData = await d3.csv(stopsCsv);
 
-const stops = g
+export const stops = g
 	.selectAll('circle')
 	.data(stopsData)
 	.join('circle')
 	.attr('fill', 'black')
-	.attr('r', 2)
-	.on('mouseover', function () {
-		//function to add mouseover event
-		d3.select(this)
-			.transition() //D3 selects the object we have moused over in order to perform operations on it
-			.duration('150') //how long we are transitioning between the two states (works like keyframes)
-			.attr('fill', 'red') //change the fill
-			.attr('r', 5); //change radius
-	})
-	.on('mouseout', function () {
-		//reverse the action based on when we mouse off the the circle
-		d3.select(this).transition().duration('150').attr('fill', 'steelblue').attr('r', 2);
-	});
+	.attr('r', 10);
 
 // Function to place svg based on zoom
 const onZoom = () => {

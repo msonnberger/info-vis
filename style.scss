@@ -4,7 +4,6 @@ body {
 		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	color: #2c3e50;
 }
 
 #map {
@@ -18,4 +17,21 @@ img {
 
 .leaflet-bottom.leaflet-left .leaflet-control {
 	background: transparent;
+}
+
+h1 {
+	font-size: 1.4rem;
+}
+
+.overlay {
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	background-color: white;
+	padding: 0 20px 10px 20px;
+	box-shadow: rgb(0 0 0 / 8%) 0px 4px 10px 0px;
+	max-width: 400px;
+	max-height: 100vh;
+	z-index: 500;
+	border-radius: 6px;
 }

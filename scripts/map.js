@@ -29,6 +29,8 @@ L.tileLayer(tileURL + tileURLParams.toString(), {
 	maxZoom: 17,
 }).addTo(map);
 
+map.zoomControl.setPosition('topright');
+
 const credits1 = L.control.attribution().addTo(map);
 
 credits1.addAttribution(
