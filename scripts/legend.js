@@ -34,24 +34,44 @@ stops.on('click', async (_, d) => {
 	stationInfo
 		.select('ul')
 		.selectAll('li')
-		.data(departures, (d) => d.line)
-		.join((enter) => {
-			let li = enter;
-			li.append('li');
-			li.append('div')
-				.text((d) => d.line)
-				.style('background-color', 'orange')
-				.style('padding', '5px')
-				.style('border-radius', '3px')
-				.style('font-size', '1rem')
-				.style('width', '24px')
-				.style('line-height', '24px')
-				.style('text-align', 'center')
-				.style('aspect-ratio', '1 / 1')
-				.style('color', 'white')
-				.style('font-weight', 'bold');
-			return li;
-		});
+		.data(departures)
+		.join(
+			(enter) => {
+				const li = enter.append('li');
+				li.append('div')
+					.attr('class', 'line-icon')
+					.text((d) => d.line)
+					.style('background-color', 'orange')
+					.style('padding', '5px')
+					.style('border-radius', '3px')
+					.style('font-size', '1rem')
+					.style('width', '24px')
+					.style('line-height', '24px')
+					.style('text-align', 'center')
+					.style('aspect-ratio', '1 / 1')
+					.style('color', 'white')
+					.style('font-weight', 'bold');
+
+				li.append('div')
+					.attr('class', 'direction')
+					.text((d) => d.direction);
+
+				li.append('div')
+					.attr('class', 'countdown')
+					.text((d) => d.countdown + 'min');
+				return li;
+			},
+			(update) => {
+				update.select('.line-icon').text((d) => d.line);
+				update.select('.direction').text((d) => d.direction);
+				update.select('.countdown').text((d) => d.countdown + 'min');
+
+				return update;
+			},
+			(exit) => {
+				return exit.remove();
+			}
+		);
 });
 
 d3.select('.close-button').on('click', () => {

@@ -28,7 +28,12 @@ app.get('/api/departures/:diva', async (req, res) => {
 		return lineDepartures;
 	});
 
-	res.json(departures.flat(2).sort((a, b) => a.countdown - b.countdown));
+	res.json(
+		departures
+			.flat(2)
+			.sort((a, b) => a.countdown - b.countdown)
+			.filter((dep) => !!dep.line && !!dep.direction && !!dep.countdown)
+	);
 });
 
 app.listen(3000, () => {
