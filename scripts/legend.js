@@ -26,10 +26,32 @@ legend
 
 stops.on('click', async (_, d) => {
 	legend.style('display', 'none');
-	const res = await fetch('http://localhost:3000/api/departures/60200014');
-	const departures = await res.json();
-	console.log(departures);
 	stationInfo.style('display', 'block').select('h1').text(d.PlatformText);
+
+	const res = await fetch('http://localhost:3000/api/departures/' + d.DIVA);
+	const departures = await res.json();
+
+	stationInfo
+		.select('ul')
+		.selectAll('li')
+		.data(departures, (d) => d.line)
+		.join((enter) => {
+			let li = enter;
+			li.append('li');
+			li.append('div')
+				.text((d) => d.line)
+				.style('background-color', 'orange')
+				.style('padding', '5px')
+				.style('border-radius', '3px')
+				.style('font-size', '1rem')
+				.style('width', '24px')
+				.style('line-height', '24px')
+				.style('text-align', 'center')
+				.style('aspect-ratio', '1 / 1')
+				.style('color', 'white')
+				.style('font-weight', 'bold');
+			return li;
+		});
 });
 
 d3.select('.close-button').on('click', () => {

@@ -21,6 +21,8 @@ img {
 
 h1 {
 	font-size: 1.4rem;
+	margin: 0;
+	margin-bottom: 20px;
 }
 
 .overlay {
@@ -28,10 +30,43 @@ h1 {
 	top: 20px;
 	left: 20px;
 	background-color: white;
-	padding: 0 20px 10px 20px;
+	padding: 20px 20px 10px 20px;
 	box-shadow: rgb(0 0 0 / 8%) 0px 4px 10px 0px;
-	max-width: 400px;
-	max-height: 100vh;
+	min-width: 240px;
+	max-height: 93vh;
 	z-index: 500;
 	border-radius: 6px;
+	overflow-y: scroll;
+
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		h1 {
+			margin: 0;
+		}
+	}
+
+	ul {
+		padding: 0;
+	}
+
+	li {
+		list-style-type: none;
+		display: flex;
+		justify-content: space-between;
+		margin: 0;
+		padding: 20px 0;
+		border-top: 1px solid lightgrey;
+	}
+}
+
+.close-button {
+	display: grid;
+	place-items: center;
+	background: none;
+	border: none;
+	padding: 4px;
+	cursor: pointer;
 }
