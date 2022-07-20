@@ -26,8 +26,10 @@ legend
 
 stops.on('click', async (_, d) => {
 	legend.style('display', 'none');
-	const text = await Promise.resolve(d.PlatformText);
-	stationInfo.style('display', 'block').select('h1').text(text);
+	const res = await fetch('https://www.wienerlinien.at/ogd_realtime/monitor?diva=60200014');
+	const departures = await res.json();
+	console.log(departures);
+	stationInfo.style('display', 'block').select('h1').text(d.PlatformText);
 });
 
 d3.select('.close-button').on('click', () => {
