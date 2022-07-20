@@ -3,5 +3,5 @@ export const config = {
 };
 
 export default (req) => {
-	return Response.json(req);
+	return new Response(JSON.stringify(req));
 };
