@@ -1,7 +1,5 @@
-export default function handler(request, response) {
-	response.status(200).json({
-		body: request.body,
-		query: request.query,
-		cookies: request.cookies,
-	});
-}
+export const config = {
+	runtime: 'experimental-edge',
+};
+
+export default (req) => new Response(req.query);
