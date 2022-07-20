@@ -26,7 +26,7 @@ legend
 
 stops.on('click', async (_, d) => {
 	legend.style('display', 'none');
-	const res = await fetch('https://www.wienerlinien.at/ogd_realtime/monitor?diva=60200014');
+	const res = await fetch('http://localhost:3000/api/departures/60200014');
 	const departures = await res.json();
 	console.log(departures);
 	stationInfo.style('display', 'block').select('h1').text(d.PlatformText);
