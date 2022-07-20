@@ -24,9 +24,10 @@ legend
 	.style('color', 'white')
 	.style('font-weight', 'bold');
 
-stops.on('click', (_, d) => {
+stops.on('click', async (_, d) => {
 	legend.style('display', 'none');
-	stationInfo.style('display', 'block').select('h1').text(d.PlatformText);
+	const text = await Promise.resolve(d.PlatformText);
+	stationInfo.style('display', 'block').select('h1').text(text);
 });
 
 d3.select('.close-button').on('click', () => {
