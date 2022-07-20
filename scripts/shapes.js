@@ -31,20 +31,19 @@ const stops = g
 	.selectAll('circle')
 	.data(stopsData)
 	.join('circle')
-	.attr('fill', 'steelblue')
-	.attr('stroke', 'black')
-	.attr('r', 3)
+	.attr('fill', 'black')
+	.attr('r', 2)
 	.on('mouseover', function () {
 		//function to add mouseover event
 		d3.select(this)
 			.transition() //D3 selects the object we have moused over in order to perform operations on it
 			.duration('150') //how long we are transitioning between the two states (works like keyframes)
 			.attr('fill', 'red') //change the fill
-			.attr('r', 10); //change radius
+			.attr('r', 5); //change radius
 	})
 	.on('mouseout', function () {
 		//reverse the action based on when we mouse off the the circle
-		d3.select(this).transition().duration('150').attr('fill', 'steelblue').attr('r', 3);
+		d3.select(this).transition().duration('150').attr('fill', 'steelblue').attr('r', 2);
 	});
 
 // Function to place svg based on zoom
@@ -53,8 +52,8 @@ const onZoom = () => {
 	//Leaflet has to take control of projecting points. Here we are feeding the latitude and longitude coordinates to
 	//leaflet so that it can project them on the coordinates of the view. Notice, we have to reverse lat and lon.
 	//Finally, the returned conversion produces an x and y point. We have to select the the desired one using .x or .y
-	stops.attr('cx', (d) => map.latLngToLayerPoint([d.stop_lat, d.stop_lon]).x);
-	stops.attr('cy', (d) => map.latLngToLayerPoint([d.stop_lat, d.stop_lon]).y);
+	stops.attr('cx', (d) => map.latLngToLayerPoint([d.Latitude, d.Longitude]).x);
+	stops.attr('cy', (d) => map.latLngToLayerPoint([d.Latitude, d.Longitude]).y);
 };
 // initialize positioning
 onZoom();
