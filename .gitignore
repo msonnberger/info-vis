@@ -23,5 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-gtfs/data/
+data/raw
+data/filter-scripts
+data/package.json
 .vercel

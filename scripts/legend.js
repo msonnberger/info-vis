@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
-import lines from '../gtfs/filtered/lines.json';
-import linesGeo from '../gtfs/filtered/linesGeo.json';
+import lines from '/data/lines.json';
+import linesGeo from '/data/linesGeo.json';
 
 import { stops } from './shapes';
 

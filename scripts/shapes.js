@@ -1,8 +1,8 @@
 import L from 'leaflet';
 import * as d3 from 'd3';
 import { map } from './map';
-import linesGeoJson from '../gtfs/filtered/linesGeo.json';
-import stopsCsv from '../gtfs/filtered/stops.csv?url';
+import linesGeoJson from '/data/linesGeo.json';
+import stopsCsv from '/data/stops.csv?url';
 
 L.svg({ clickable: true }).addTo(map);
 
