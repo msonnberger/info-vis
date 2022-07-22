@@ -45,5 +45,8 @@ async function getDepartures(diva) {
 		return lineDepartures;
 	});
 
-	return departures.flat(2).sort((a, b) => a.countdown - b.countdown);
+	return departures
+		.flat(2)
+		.filter((dep) => !!dep.countdown && !!dep.line && !!dep.direction)
+		.sort((a, b) => a.countdown - b.countdown);
 }

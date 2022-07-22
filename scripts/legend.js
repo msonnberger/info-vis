@@ -1,5 +1,7 @@
 import * as d3 from 'd3';
-import lines from '../gtfs/filtered/linesGeo.json';
+import lines from '../gtfs/filtered/lines.json';
+import linesGeo from '../gtfs/filtered/linesGeo.json';
+
 import { stops } from './shapes';
 
 const legend = d3.select('.legend');
@@ -10,10 +12,10 @@ legend
 	.style('display', 'flex')
 	.style('gap', '8px')
 	.selectAll('div')
-	.data(lines.features)
+	.data(linesGeo.features)
 	.join('div')
 	.text((d) => d.properties.line)
-	.style('background-color', (d) => d.properties.color)
+	.style('background-color', (d) => lines[d.properties.line].color)
 	.style('padding', '5px')
 	.style('border-radius', '3px')
 	.style('font-size', '1.2rem')
@@ -41,7 +43,7 @@ stops.on('click', async (_, d) => {
 				li.append('div')
 					.attr('class', 'line-icon')
 					.text((d) => d.line)
-					.style('background-color', 'orange')
+					.style('background-color', (d) => lines[d.line].color)
 					.style('padding', '5px')
 					.style('border-radius', '3px')
 					.style('font-size', '1rem')
@@ -54,17 +56,20 @@ stops.on('click', async (_, d) => {
 
 				li.append('div')
 					.attr('class', 'direction')
-					.text((d) => d.direction);
+					.text((d) => lines[d.line].directions[d.direction]);
 
 				li.append('div')
 					.attr('class', 'countdown')
-					.text((d) => d.countdown + 'min');
+					.text((d) => (d.countdown === 0 ? 'now' : d.countdown + 'min'));
 				return li;
 			},
 			(update) => {
-				update.select('.line-icon').text((d) => d.line);
-				update.select('.direction').text((d) => d.direction);
-				update.select('.countdown').text((d) => d.countdown + 'min');
+				update
+					.select('.line-icon')
+					.text((d) => d.line)
+					.style('background-color', (d) => lines[d.line].color);
+				update.select('.direction').text((d) => lines[d.line].directions[d.direction]);
+				update.select('.countdown').text((d) => (d.countdown === 0 ? 'now' : d.countdown + 'min'));
 
 				return update;
 			},
