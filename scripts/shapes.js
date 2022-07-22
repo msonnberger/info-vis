@@ -4,6 +4,9 @@ import { map } from './map';
 import linesGeoJson from '/data/linesGeo.json';
 import stopsCsv from '/data/stops.csv?url';
 
+const calcCircleRadius = () => Math.pow(1.1, map.getZoom() * 1.1);
+const calcStrokeWidth = () => Math.pow(1.14, map.getZoom() * 1.1);
+
 L.svg({ clickable: true }).addTo(map);
 
 export const svg = d3
@@ -31,24 +34,47 @@ const lines = g
 
 const stopsData = await d3.csv(stopsCsv);
 
+const tooltip = g
+	.append('text')
+	.style('visibility', 'hidden')
+	.style('font-size', '14px')
+	.style('font-weight', 'bold');
+
 export const stops = g
 	.selectAll('circle')
 	.data(stopsData)
 	.join('circle')
 	.attr('fill', 'black')
 	.attr('stroke', 'transparent')
-	.attr('stroke-width', '30');
+	.attr('stroke-width', '20')
+	.style('cursor', 'pointer')
+	.on('mouseover', function (_, d) {
+		d3.select(this)
+			.transition()
+			.duration(100)
+			.attr('r', calcCircleRadius() * 2);
+
+		tooltip
+			.style('visibility', 'visible')
+			.text(d.PlatformText)
+			.attr('x', map.latLngToLayerPoint([d.Latitude, d.Longitude]).x + 15)
+			.attr('y', map.latLngToLayerPoint([d.Latitude, d.Longitude]).y + 3);
+	})
+	.on('mouseout', function () {
+		d3.select(this).transition().duration(100).attr('r', calcCircleRadius());
+		tooltip.style('visibility', 'hidden');
+	});
 
 // Function to place svg based on zoom
 const onZoom = () => {
 	lines.attr('d', pathCreator);
-	lines.attr('stroke-width', Math.pow(1.14, map.getZoom() * 1.1));
+	lines.attr('stroke-width', calcStrokeWidth());
 	//Leaflet has to take control of projecting points. Here we are feeding the latitude and longitude coordinates to
 	//leaflet so that it can project them on the coordinates of the view. Notice, we have to reverse lat and lon.
 	//Finally, the returned conversion produces an x and y point. We have to select the the desired one using .x or .y
 	stops.attr('cx', (d) => map.latLngToLayerPoint([d.Latitude, d.Longitude]).x);
 	stops.attr('cy', (d) => map.latLngToLayerPoint([d.Latitude, d.Longitude]).y);
-	stops.attr('r', Math.pow(1.1, map.getZoom() * 1.1));
+	stops.attr('r', calcCircleRadius());
 };
 // initialize positioning
 onZoom();
