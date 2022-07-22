@@ -10,6 +10,7 @@ export const svg = d3
 	.select(map.getPanes().overlayPane)
 	.select('svg')
 	.attr('pointer-events', 'auto');
+
 const g = svg.append('g');
 
 const projection = d3.geoTransform({
@@ -26,8 +27,7 @@ const lines = g
 	.data(linesGeoJson.features)
 	.join('path')
 	.attr('fill', 'none')
-	.attr('stroke', (d) => d.properties.color)
-	.attr('stroke-width', 4);
+	.attr('stroke', (d) => d.properties.color);
 
 const stopsData = await d3.csv(stopsCsv);
 
@@ -36,16 +36,19 @@ export const stops = g
 	.data(stopsData)
 	.join('circle')
 	.attr('fill', 'black')
-	.attr('r', 10);
+	.attr('stroke', 'transparent')
+	.attr('stroke-width', '30');
 
 // Function to place svg based on zoom
 const onZoom = () => {
 	lines.attr('d', pathCreator);
+	lines.attr('stroke-width', Math.pow(1.14, map.getZoom() * 1.1));
 	//Leaflet has to take control of projecting points. Here we are feeding the latitude and longitude coordinates to
 	//leaflet so that it can project them on the coordinates of the view. Notice, we have to reverse lat and lon.
 	//Finally, the returned conversion produces an x and y point. We have to select the the desired one using .x or .y
 	stops.attr('cx', (d) => map.latLngToLayerPoint([d.Latitude, d.Longitude]).x);
 	stops.attr('cy', (d) => map.latLngToLayerPoint([d.Latitude, d.Longitude]).y);
+	stops.attr('r', Math.pow(1.1, map.getZoom() * 1.1));
 };
 // initialize positioning
 onZoom();

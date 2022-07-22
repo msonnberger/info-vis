@@ -6,6 +6,10 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+p {
+	margin: 0;
+}
+
 #map {
 	width: 100vw;
 	height: 100vh;
@@ -38,13 +42,14 @@ h1 {
 	border-radius: 6px;
 	overflow-y: scroll;
 
-	.header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+	header {
+		display: grid;
+		grid-template-columns: auto auto;
+		row-gap: 16px;
 
 		h1 {
 			margin: 0;
+			grid-column: span 2;
 		}
 	}
 
@@ -56,8 +61,10 @@ h1 {
 		list-style-type: none;
 		display: flex;
 		justify-content: space-between;
+		gap: 16px;
+		align-items: center;
 		margin: 0;
-		padding: 20px 0;
+		padding: 16px 0;
 		border-top: 1px solid lightgrey;
 	}
 }
@@ -69,4 +76,34 @@ h1 {
 	border: none;
 	padding: 4px;
 	cursor: pointer;
+	place-self: start end;
+}
+
+.lines-at-station {
+	display: flex;
+	gap: 8px;
+	align-self: start;
+}
+
+.line-icon {
+	aspect-ratio: 1 / 1;
+	color: white;
+	font-weight: bold;
+	border-radius: 3px;
+	padding: 0.3em;
+	text-align: center;
+}
+
+.direction,
+.countdown {
+	font-size: 0.9rem;
+	font-weight: bold;
+}
+
+.countdown span {
+	font-size: 0.8em;
+}
+
+.direction {
+	flex-grow: 1;
 }

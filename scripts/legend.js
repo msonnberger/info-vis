@@ -14,17 +14,12 @@ legend
 	.selectAll('div')
 	.data(linesGeo.features)
 	.join('div')
+	.attr('class', 'line-icon')
 	.text((d) => d.properties.line)
 	.style('background-color', (d) => lines[d.properties.line].color)
-	.style('padding', '5px')
-	.style('border-radius', '3px')
 	.style('font-size', '1.2rem')
 	.style('width', '30px')
-	.style('line-height', '30px')
-	.style('text-align', 'center')
-	.style('aspect-ratio', '1 / 1')
-	.style('color', 'white')
-	.style('font-weight', 'bold');
+	.style('line-height', '30px');
 
 stops.on('click', async (_, d) => {
 	legend.style('display', 'none');
@@ -32,6 +27,26 @@ stops.on('click', async (_, d) => {
 
 	const res = await fetch('http://localhost:8787/?diva=' + d.DIVA);
 	const departures = await res.json();
+	const linesAtStation = [...new Set(departures.map((dep) => dep.line))].sort();
+
+	stationInfo
+		.select('header')
+		.select('.lines-at-station')
+		.selectAll('div')
+		.data(linesAtStation)
+		.join(
+			(enter) =>
+				enter
+					.append('div')
+					.attr('class', 'line-icon')
+					.text((d) => d)
+					.style('background-color', (d) => lines[d].color)
+					.style('font-size', '0.8rem')
+					.style('width', '20px')
+					.style('line-height', '20px'),
+			(update) => update.text((d) => d).style('background-color', (d) => lines[d].color),
+			(exit) => exit.remove()
+		);
 
 	stationInfo
 		.select('ul')
@@ -44,23 +59,20 @@ stops.on('click', async (_, d) => {
 					.attr('class', 'line-icon')
 					.text((d) => d.line)
 					.style('background-color', (d) => lines[d.line].color)
-					.style('padding', '5px')
-					.style('border-radius', '3px')
 					.style('font-size', '1rem')
 					.style('width', '24px')
-					.style('line-height', '24px')
-					.style('text-align', 'center')
-					.style('aspect-ratio', '1 / 1')
-					.style('color', 'white')
-					.style('font-weight', 'bold');
+					.style('line-height', '24px');
 
-				li.append('div')
+				li.append('p')
 					.attr('class', 'direction')
 					.text((d) => lines[d.line].directions[d.direction]);
 
-				li.append('div')
+				li.append('p')
 					.attr('class', 'countdown')
-					.text((d) => (d.countdown === 0 ? 'now' : d.countdown + 'min'));
+					.text((d) => (d.countdown === 0 ? 'now' : d.countdown))
+					.filter((d) => d.countdown !== 0)
+					.append('span')
+					.html('&hairsp;min');
 				return li;
 			},
 			(update) => {
@@ -69,13 +81,16 @@ stops.on('click', async (_, d) => {
 					.text((d) => d.line)
 					.style('background-color', (d) => lines[d.line].color);
 				update.select('.direction').text((d) => lines[d.line].directions[d.direction]);
-				update.select('.countdown').text((d) => (d.countdown === 0 ? 'now' : d.countdown + 'min'));
+				update
+					.select('.countdown')
+					.text((d) => (d.countdown === 0 ? 'now' : d.countdown))
+					.filter((d) => d.countdown !== 0)
+					.append('span')
+					.html('&hairsp;min');
 
 				return update;
 			},
-			(exit) => {
-				return exit.remove();
-			}
+			(exit) => exit.remove()
 		);
 });
 
