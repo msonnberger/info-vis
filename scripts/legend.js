@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import lines from '../gtfs/filtered/linesGeo.json';
-import { svg, stops } from './shapes';
+import { stops } from './shapes';
 
 const legend = d3.select('.legend');
 const stationInfo = d3.select('.station-info').style('display', 'none');
@@ -28,7 +28,7 @@ stops.on('click', async (_, d) => {
 	legend.style('display', 'none');
 	stationInfo.style('display', 'block').select('h1').text(d.PlatformText);
 
-	const res = await fetch('http://localhost:3000/api/departures/' + d.DIVA);
+	const res = await fetch('http://localhost:8787/?diva=' + d.DIVA);
 	const departures = await res.json();
 
 	stationInfo
