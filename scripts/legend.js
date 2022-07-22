@@ -25,7 +25,7 @@ stops.on('click', async (_, d) => {
 	legend.style('display', 'none');
 	stationInfo.style('display', 'block').select('h1').text(d.PlatformText);
 
-	const res = await fetch('http://localhost:8787/?diva=' + d.DIVA);
+	const res = await fetch('https://api.msonnberger.workers.dev/?diva=' + d.DIVA);
 	const departures = await res.json();
 	const linesAtStation = [...new Set(departures.map((dep) => dep.line))].sort();
 
