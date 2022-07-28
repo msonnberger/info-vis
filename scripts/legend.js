@@ -2,7 +2,8 @@ import * as d3 from 'd3';
 import lines from '/data/lines.json';
 import linesGeo from '/data/linesGeo.json';
 
-import { stops } from './shapes';
+import { stops, addVehicles } from './shapes';
+import { calcVehiclePaths } from './helpers';
 
 const legend = d3.select('.legend');
 const stationInfo = d3.select('.station-info').style('display', 'none');
@@ -28,6 +29,8 @@ stops.on('click', async (_, d) => {
 	const res = await fetch('https://api.msonnberger.workers.dev/?diva=' + d.DIVA);
 	const departures = await res.json();
 	const linesAtStation = [...new Set(departures.map((dep) => dep.line))].sort();
+	const vehiclePaths = calcVehiclePaths(departures, [+d.Longitude, +d.Latitude]);
+	addVehicles(vehiclePaths);
 
 	stationInfo
 		.select('header')

@@ -1,6 +1,7 @@
 {
 	"U1": {
 		"color": "#E3000F",
+		"darkerColor": "#710007",
 		"directions": {
 			"H": "Leopoldau",
 			"R": "Oberlaa"
@@ -8,6 +9,7 @@
 	},
 	"U2": {
 		"color": "#A862A4",
+		"darkerColor": "#543152",
 		"directions": {
 			"H": "Schottentor",
 			"R": "Seestadt"
@@ -15,6 +17,7 @@
 	},
 	"U3": {
 		"color": "#EF7C00",
+		"darkerColor": "#773e00",
 		"directions": {
 			"H": "Simmering",
 			"R": "Ottakring"
@@ -22,6 +25,7 @@
 	},
 	"U4": {
 		"color": "#319F49",
+		"darkerColor": "#195025",
 		"directions": {
 			"H": "Heiligenstadt",
 			"R": "Hütteldorf"
@@ -29,6 +33,7 @@
 	},
 	"U6": {
 		"color": "#9D6830",
+		"darkerColor": "#4f3418",
 		"directions": {
 			"H": "Floridsdorf",
 			"R": "Siebenhirten"

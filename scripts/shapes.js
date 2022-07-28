@@ -14,7 +14,7 @@ export const svg = d3
 	.select('svg')
 	.attr('pointer-events', 'auto');
 
-const g = svg.append('g');
+export const g = svg.append('g');
 
 const projection = d3.geoTransform({
 	point: function (lon, lat) {
@@ -32,11 +32,6 @@ const lines = g
 	.attr('fill', 'none')
 	.attr('id', (d) => d.properties.line)
 	.attr('stroke', (d) => d.properties.color);
-
-/* svg.insert('rect').attr('width', '40').attr('height', '10').attr('fill', 'blue')
-	.html(`<animateMotion dur="20s" rotate="auto" >
-<mpath xlink:href="#U3"/>
-</animateMotion>`); */
 
 const stopsData = await d3.csv(stopsCsv);
 
@@ -81,8 +76,37 @@ const onZoom = () => {
 	stops.attr('cx', (d) => map.latLngToLayerPoint([d.Latitude, d.Longitude]).x);
 	stops.attr('cy', (d) => map.latLngToLayerPoint([d.Latitude, d.Longitude]).y);
 	stops.attr('r', calcCircleRadius());
+	d3.selectAll('.vehicle')
+		.attr('r', calcStrokeWidth() / 2)
+		.select('animateMotion')
+		.attr('path', pathCreator);
 };
 // initialize positioning
 onZoom();
 // reset whenever map is moved
 map.on('zoomend', onZoom);
+
+export const addVehicles = (vehiclePaths) => {
+	const vehicles = g
+		.selectAll('circle.vehicle')
+		.data(vehiclePaths)
+		.join(
+			(enter) =>
+				enter
+					.append('circle')
+					.attr('class', 'vehicle')
+					.attr('r', calcStrokeWidth() / 2)
+					.attr('fill', (d) => d.properties.color)
+					.append('animateMotion')
+					.attr('dur', (d) => d.properties.countdown * 60 + 's')
+					.attr('path', pathCreator)
+					.attr('rotate', 'auto'),
+			(update) =>
+				update
+					.attr('fill', (d) => d.properties.color)
+					.select('animateMotion')
+					.attr('dur', (d) => d.properties.countdown * 60 + 's')
+					.attr('path', pathCreator),
+			(exit) => exit.remove()
+		);
+};
