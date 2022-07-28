@@ -2,6 +2,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import mapboxLogo from '../mapbox-logo.base64?raw';
 
+// create new map instance with center set on Stephansplatz, Vienna
 export const map = L.map('map', {
 	center: [48.20884, 16.3712904],
 	zoom: 12.5,
@@ -22,6 +23,7 @@ const tileURLParams = new URLSearchParams({
 const tileURL =
 	'https://api.mapbox.com/styles/v1/msonnberger/cl5p8hn9x000d14kfe0x09188/tiles/{z}/{x}/{y}@2x?';
 
+// add Mapbox tiles as a tile layer to the map
 L.tileLayer(tileURL + tileURLParams.toString(), {
 	zoomOffset: -1,
 	tileSize: 512,

@@ -2,7 +2,7 @@
 
 ## Instructions
 
-This app has been tested with Node.js version 16.
+This app has been tested with Node.js version 16 and the newest version of Firefox, Chrome and Safari.
 
 To start the local dev server, clone the repository (either by running `git clone https://github.com/msonnberger/info-vis.git`
 or by downloading the project as a `.zip` file via GitHub) and run the following commands:
@@ -94,4 +94,3 @@ The corresponding code for the API endpoint is located in `api/src/index.js`.
 Moving dots representing trains:
 
 https://user-images.githubusercontent.com/26038247/181595297-d0f67089-d885-4cde-9027-18bd3bb9de79.mov
-
