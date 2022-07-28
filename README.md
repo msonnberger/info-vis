@@ -49,11 +49,11 @@ in order to decide whether one has to hurry or if there is enough time to get a 
 
 ### Findings
 
-One thing that I found surprising is how much went into filtering and converting the data into a form in which
-in can be used directly. When dealing with such huge amounts of data (one raw file even contained around 500MB!), one
-can't just edit some data manually but has to write a scripts which applies the transformation on all rows.
-With many millions of rows, I even had to use read and write streams instead of loading the whole file in memory in
-order to maintain performance at an acceptable level.
+One thing that I found surprising is how much time went into filtering and converting the data into a form in which
+it can be used directly. When dealing with such huge amounts of data (one raw file contained around 500MB!), one
+cannot just edit some data manually but has to write a script which applies the transformation on all rows.
+With many million rows, I even had to use read and write streams instead of loading the whole file in memory in
+order to keep performance at an acceptable level.
 
 d3.js is a very low-level, imperative library, which makes it both very powerful but also quite difficult to learn
 and understand. It has some very convenient features built in, especially when looking at its mapping and projection
@@ -73,10 +73,10 @@ In this directory the following files can be found:
   which is an `svg` element that can be used by d3.js to add custom visualizations.
 - `shapes.js`: in this file, the GeoJSON data for the lines as well as the stops data is loaded and added to the map.
   It creates a custom projection to transform longitude and latitude into SVG coordinates. See comments for further explanation.
-- `legend.js`: Legend refers to the sidebar on the left of the map which displays further information about the currently selected
+- `legend.js`: Legend refers to the sidebar on the left side of the map which displays further information about the currently selected
   station and its departures. It fetches the realtime departure data from the API proxy (further explanation below) and updates the displayed values.
 - `helpers.js`: in here, the current positions of trains approaching a selected station is calculated (based on the countdown to departure and
-  the average speed of metro trains). The calculated positions are used in `shapes.js` to add circles to the lines, each
+  the average speed of metro trains). The calculated positions are used in `shapes.js` to add dots to the lines, each
   of which represents a train on its way to the station.
 
 ### API Proxy
@@ -88,6 +88,6 @@ The corresponding code for the API endpoint is located in `api/src/index.js`.
 
 ## Screenshots
 
-[Default View](screenshots/screenshot1.png)
-[Detailed Station View](screenshots/screenshot2.png)
-[Moving Trains](screenshots/screen-recording.mov)
+![Default View](screenshots/screenshot1.png)
+![Detailed Station View](screenshots/screenshot2.png)
+![Moving Trains](screenshots/screen-recording.mov)
