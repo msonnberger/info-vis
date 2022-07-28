@@ -30,7 +30,13 @@ const lines = g
 	.data(linesGeoJson.features)
 	.join('path')
 	.attr('fill', 'none')
+	.attr('id', (d) => d.properties.line)
 	.attr('stroke', (d) => d.properties.color);
+
+/* svg.insert('rect').attr('width', '40').attr('height', '10').attr('fill', 'blue')
+	.html(`<animateMotion dur="20s" rotate="auto" >
+<mpath xlink:href="#U3"/>
+</animateMotion>`); */
 
 const stopsData = await d3.csv(stopsCsv);
 
