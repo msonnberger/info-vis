@@ -92,5 +92,6 @@ The corresponding code for the API endpoint is located in `api/src/index.js`.
 ![Detailed Station View](screenshots/screenshot2.png)
 
 Moving dots representing trains:
+
 https://user-images.githubusercontent.com/26038247/181595297-d0f67089-d885-4cde-9027-18bd3bb9de79.mov
 
