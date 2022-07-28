@@ -2,7 +2,8 @@
 
 ## Instructions
 
-This app has been tested with Node.js version 16 and the newest version of Firefox, Chrome and Safari.
+This app has been tested with Node.js version 16. Please use the latest version of either Firefox, Chrome or Safari as this
+project uses new SVG features such as [animateMotion](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/animateMotion) (see [compatability](https://caniuse.com/mdn-svg_elements_animatemotion)).
 
 To start the local dev server, clone the repository (either by running `git clone https://github.com/msonnberger/info-vis.git`
 or by downloading the project as a `.zip` file via GitHub) and run the following commands:
