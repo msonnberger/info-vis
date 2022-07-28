@@ -1,8 +1,3 @@
-/**
- * - Run `npx wrangler dev src/index.js` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your worker in action
- */
-
 export default {
 	async fetch(request) {
 		const { searchParams } = new URL(request.url);
