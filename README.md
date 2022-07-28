@@ -11,6 +11,7 @@ or by downloading the project as a `.zip` file via GitHub) and run the following
 - `npm run dev`
 
 You can now view the app on `http://localhost:5173`.
+Alternatively, you can visit the deployed version at [ubahn-wien.vercel.app](https://ubahn-wien.vercel.app).
 
 ## Aim
 
