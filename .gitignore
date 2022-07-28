@@ -24,6 +24,4 @@ dist-ssr
 *.sw?
 
 data/raw
-data/filter-scripts
-data/package.json
 .vercel
